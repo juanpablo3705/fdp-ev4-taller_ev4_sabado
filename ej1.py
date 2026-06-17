@@ -24,10 +24,28 @@ def opcion_menu():
 
 # funcion 1 agregar vehiculo:
 
-def agregar_vehiculo():
+def agregar_vehiculo(lista_vehiculos): # lista_vehiculos es lo que entrega esta funcion
     modelo = input("Ingrese el modelo del vehículo: ")
     anio = input("Ingrese el año del vehículo: ")
     precio = input("Ingrese el precio del vehículo: ")
+    modelo_valido = validacion_modelo(modelo) # recogo en la variable modelo_valido el retorno de la funcion
+    anio_valido = validacion_anio(anio) # este retorno es un True o un False según la validacion
+    precio_valido = validacion_precio(precio) # este true o false se usará ahora en la validacion con msj de error:
+    if modelo_valido and anio_valido and precio_valido:
+        # entonces agrego los datos a un diccionario para cada vehiculo:
+        diccionario_vehiculo = { # inicializo el diccionario con claves establecidas:
+            "Modelo": modelo, # no es modelo_valido porque eso sería un true o false solamente
+            "Año": anio,
+            "Precio": precio,
+            "Disponible": False # el enunciado pide disponibilidad, parte en false porque no estaría hasta que esté
+        }
+    # y ahora agrego cada vehiculo a la lista de vehiculos totales.
+    # este ejercicio es una sola gran lista que contiene un diccionario por cada vehículo:
+        lista_vehiculos.append(diccionario_vehiculo) # lista_vehiculos es la lista general de diccionarios
+        print("Vehículo agregado correctamente.")
+    else:
+        print("Error, debe ingresar los requisitos para ingresar un vehículo.")
+
 
 def validacion_modelo(modelo): # hay que llamar a la variable que se valida (modelo)
     if (modelo == "") or (modelo.strip() == ""):
@@ -64,6 +82,8 @@ def validacion_precio(precio):
 
 # programa principal:
 
+lista_vehiculos = [] # inicializo vacía la gran lista de vehículos que contendrá diccionarios de cada modelo
+
 while True:
 
     menu_principal()
@@ -71,6 +91,7 @@ while True:
 
     match seleccion:
         case 1:
+            agregar_vehiculo()
         case 2:
         case 3:
         case 4:
