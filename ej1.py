@@ -1,4 +1,4 @@
-# funciones programa principal:
+# funciones menú principal:
 
 def menu_principal():
     print("========== MENÚ PRINCIPAL ==========")
@@ -44,7 +44,7 @@ def agregar_vehiculo(lista_vehiculos): # lista_vehiculos es lo que entrega esta 
         lista_vehiculos.append(diccionario_vehiculo) # lista_vehiculos es la lista general de diccionarios
         print("Vehículo agregado correctamente.")
     else:
-        print("Error, debe ingresar los requisitos para ingresar un vehículo.")
+        print("Error, debe cumplir los requisitos para ingresar un vehículo.")
 
 
 def validacion_modelo(modelo): # hay que llamar a la variable que se valida (modelo)
@@ -74,6 +74,21 @@ def validacion_precio(precio):
     except ValueError:
         return False
 
+# funcion 2 buscar vehículo:
+
+def buscar_vehiculo(lista_vehiculos, modelo): # la funcion recibe porque necesita 2 cosas: la lista y el modelo
+
+    for indice, diccionario_vehiculo in enumerate(lista_vehiculos):
+    # diccionario_vehiculo: cada elemento o cada vehiculo, es el indice pero con nombre
+    # se añade el indice tambien para que aparte de la clave, tenga la posicion
+    # se usa enumerate para darle un valor de posicion a cada elemento de la lista_vehiculos
+    # lista_vehiculos es el listado que contiene los variados diccionario_vehiculo
+        if modelo == diccionario_vehiculo["modelo"]:
+        # el for recorre la lista de vehiculos y compara las claves de diccionario_vehiculo
+        # y si los dos modelos coinciden, retorna un indice >= 0 y sino, retorna -1
+            return indice
+    return -1 # si no se cumple el return indice por el if, entonces la funcion terminará porque cuando acabe
+              # el for se pasa a esta línea (por eso este return -1 va fuera del for)
 
 
 
@@ -93,6 +108,19 @@ while True:
         case 1:
             agregar_vehiculo()
         case 2:
+            modelo_buscado = input("Ingrese el modelo a buscar: ")
+            indice_vehiculo = buscar_vehiculo(lista_vehiculos, modelo_buscado)
+            # se llama a la funcion buscar_vehiculo y se le entrega la lista_vehiculos y la variable
+            # de modelo_buscado para hacerla coincidir con el modelo en la función buscar_vehiculo.
+            # esta funcion entregó el indice o posicion del vehículo encontrado
+            if indice_vehiculo >= 0: # o sea si se encontró el vehículo porque el resultado de la funcion no fue -1
+                print(f"Vehículo encontrado en la posición {indice_vehiculo}.")
+                print(f"Modelo: {lista_vehiculos[indice_vehiculo]['modelo']}")
+                print(f"Año: {lista_vehiculos[indice_vehiculo]['anio']}")
+                print(f"Precio: {lista_vehiculos[indice_vehiculo]['precio']}")
+                print(f"Estadoo: {lista_vehiculos[indice_vehiculo]['disponible']}")
+            else:
+                print(f"El vehículo {modelo_buscado} no se encuentra.")
         case 3:
         case 4:
         case 5:
