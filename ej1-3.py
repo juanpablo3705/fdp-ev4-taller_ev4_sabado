@@ -78,14 +78,14 @@ def agregar_vehiculo(coleccion_vehiculos):
     print(f"Modelo {modelo} agregado con éxito.")
 
 # funcion 2 buscar indice:
-def buscar_indice(coleccion_vehiculos, modelo):
-    for indice in range(len(coleccion_vehiculos)):
+def buscar_indice(coleccion_vehiculos, modelo): 
+    for indice in range(len(coleccion_vehiculos)): # necesito especificar len() porque estoy recorriendo indices, no diccionarios
         if coleccion_vehiculos[indice]["modelo"] == modelo:
             return indice
     return -1
 
 # funcion 4 actualizar disponibilidad:
-def actualizar_disponibilidad(coleccion_vehiculos):
+def actualizar_disponibilidad(coleccion_vehiculos): # acá si estoy recorriendo elementos de diccionarios, no indices
     for vehiculo in coleccion_vehiculos:
         if vehiculo["año"] >= 2020:
             vehiculo["disponible"] = True
