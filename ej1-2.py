@@ -82,7 +82,7 @@ def actualizar_disponibilidad(coleccion_vehiculos):
     if len(coleccion_vehiculos) == 0:
         print("Error, no hay vehículos registrados.")
         return
-    for vehiculo in coleccion_vehiculos: # por que no es "range(len(coleccion_vehiculos))" en vez de solo "coleccion_vehiculos"?
+    for vehiculo in coleccion_vehiculos: 
         if vehiculo["año"] >= 2020:
             vehiculo["disponible"] = True
         else:
